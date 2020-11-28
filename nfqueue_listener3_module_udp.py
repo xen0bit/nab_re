@@ -12,8 +12,7 @@ import pickle
 import argparse
 import random
 import colordiff
-import osrs as osrs
-import rl as rl
+import nab as nab
 
 parser = argparse.ArgumentParser(description="Binds to queue and modifies packets that match the rule")
 parser.add_argument("proto", type=str, help="tcp or udp")
@@ -50,7 +49,7 @@ except ValueError as e:
     sys.exit(1)
 
 def validateRule(data):
-    if(('Raw' in data) and (random.random() < fuzzPercent)):
+    if('Raw' in data):
             return True
     else:
         return False
@@ -90,7 +89,7 @@ def callback(pkt):
         packetLoadBefore = str(packet[UDP].payload)
         #packet = modifyPacket(packet)
         #packet = osrs.listSplit(packet)
-        packet = rl.fuzz(packet)
+        packet = nab.findRemy(packet)
         packet = recalcChecksum(packet)
         #print("AFTER")
         #packet.show2()
