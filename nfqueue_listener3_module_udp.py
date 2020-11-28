@@ -83,6 +83,7 @@ def callback(pkt):
     packet = IP(pkt.get_payload())
     #Does Packet have 'Raw' Data
     if(validateRule(packet)):
+        print('validated packet')
         #Fuzz packets ~x% of the time
         #print("BEFORE")
         #packet.show2()
