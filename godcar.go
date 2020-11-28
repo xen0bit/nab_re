@@ -22,7 +22,7 @@ func realCallback(payload *nfqueue.Payload) int {
 	// Get the TCP layer from this packet
 	if udpLayer := packet.Layer(layers.LayerTypeUDP); udpLayer != nil {
 		// Get actual TCP data from this layer
-		udp, _ := tcpLayer.(*layers.UDP)
+		udp, _ := udpLayer.(*layers.UDP)
 		fmt.Printf("From src port %d to dst port %d\n", udp.SrcPort, udp.DstPort)
 	}
 	//Log Initial State
