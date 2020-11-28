@@ -20,10 +20,10 @@ func realCallback(payload *nfqueue.Payload) int {
 	// Decode a packet
 	packet := gopacket.NewPacket(payload.Data, layers.LayerTypeIPv4, gopacket.Default)
 	// Get the TCP layer from this packet
-	if tcpLayer := packet.Layer(layers.LayerTypeTCP); tcpLayer != nil {
+	if udpLayer := packet.Layer(layers.LayerTypeUDP); udpLayer != nil {
 		// Get actual TCP data from this layer
-		tcp, _ := tcpLayer.(*layers.TCP)
-		fmt.Printf("From src port %d to dst port %d\n", tcp.SrcPort, tcp.DstPort)
+		udp, _ := tcpLayer.(*layers.UDP)
+		fmt.Printf("From src port %d to dst port %d\n", udp.SrcPort, udp.DstPort)
 	}
 	//Log Initial State
 	fmt.Printf("  id: %d\n", payload.Id)
