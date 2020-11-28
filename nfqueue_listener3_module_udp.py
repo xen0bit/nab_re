@@ -99,8 +99,8 @@ def callback(pkt):
     pkt.set_payload(raw(packet))
 
     pkt.accept()
-else:
-    pkt.accept()
+# else:
+#     pkt.accept()
 
 sys.stdout.write('Listening on NFQUEUE queue-num %s... \n' % str(QUEUE_NUM))
 
