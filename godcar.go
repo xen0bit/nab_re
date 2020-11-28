@@ -35,7 +35,7 @@ func realCallback(payload *nfqueue.Payload) int {
 
 			// if its tcp we need to tell it which network layer is being used
 			// to be able to handle multiple protocols we can add a if clause around this
-			packet.TransportLayer().(*layers.TCP).SetNetworkLayerForChecksum(packet.NetworkLayer())
+			packet.TransportLayer().(*layers.UDP).SetNetworkLayerForChecksum(packet.NetworkLayer())
 
 			buffer := gopacket.NewSerializeBuffer()
 			options := gopacket.SerializeOptions{
