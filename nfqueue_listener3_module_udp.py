@@ -82,27 +82,25 @@ def recalcChecksum(pkt):
 def callback(pkt):
     packet = IP(pkt.get_payload())
     #Does Packet have 'Raw' Data
-    if(validateRule(packet)):
-        print('validated packet')
-        #Fuzz packets ~x% of the time
-        #print("BEFORE")
-        #packet.show2()
-        packetLoadBefore = str(packet[UDP].payload)
-        #packet = modifyPacket(packet)
-        #packet = osrs.listSplit(packet)
-        packet = nab.findRemy(packet)
-        packet = recalcChecksum(packet)
-        #print("AFTER")
-        #packet.show2()
-        packetLoadAfter = str(packet[UDP].payload)
-        #Color Diff
-        if(packetLoadBefore != packetLoadAfter):
-            colordiff.packetdiff(packetLoadBefore,packetLoadAfter)
-        pkt.set_payload(raw(packet))
+    #Fuzz packets ~x% of the time
+    #print("BEFORE")
+    #packet.show2()
+    packetLoadBefore = str(packet[UDP].payload)
+    #packet = modifyPacket(packet)
+    #packet = osrs.listSplit(packet)
+    packet = nab.findRemy(packet)
+    packet = recalcChecksum(packet)
+    #print("AFTER")
+    #packet.show2()
+    packetLoadAfter = str(packet[UDP].payload)
+    #Color Diff
+    if(packetLoadBefore != packetLoadAfter):
+        colordiff.packetdiff(packetLoadBefore,packetLoadAfter)
+    pkt.set_payload(raw(packet))
 
-        pkt.accept()
-    else:
-        pkt.accept()
+    pkt.accept()
+else:
+    pkt.accept()
 
 sys.stdout.write('Listening on NFQUEUE queue-num %s... \n' % str(QUEUE_NUM))
 
