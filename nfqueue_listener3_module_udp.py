@@ -40,6 +40,7 @@ def resetSystemFilter():
     proc = subprocess.check_output(command, shell=True)
 
 #Create nfqueue
+print(args)
 setSystemFilter(args.proto, args.sourceport)
 #Check that there is an instantiated nfqueue
 try:
