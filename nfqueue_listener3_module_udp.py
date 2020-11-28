@@ -27,7 +27,7 @@ currentPacketOnDisk = 1
 
 def setSystemFilter(proto, sourceport):
     print('Routing traffic to nfqueue...')
-    command = 'sudo iptables -t raw -A PREROUTING -p $PROTO --dport $PORT -j NFQUEUE --queue-num 1'
+    command = 'sudo iptables -t raw -A PREROUTING -p $PROTO --source-port $PORT -j NFQUEUE --queue-num 1'
     command = command.replace('$PROTO', str(proto))
     command = command.replace('$PORT', str(sourceport))
     print(command)
