@@ -80,6 +80,7 @@ def recalcChecksum(pkt):
     return pkt
 
 def callback(pkt):
+    print('hit callback')
     packet = IP(pkt.get_payload())
     #Does Packet have 'Raw' Data
     #Fuzz packets ~x% of the time
